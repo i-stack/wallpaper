@@ -1,6 +1,7 @@
 var seting = {
-    // apiUrl: "https://api.vvhan.com/api/360wallpaperApi.php",
-    apiUrl: "http://wp.birdpaper.com.cn/intf/GetListByCategory",
+    // apiUrl: "https://api.vvhan.com/api/360wallpaperApi.php", // 这个接口已经不维护了,壁纸数量有限
+    // apiUrl: "http://wp.birdpaper.com.cn/intf/GetListByCategory", // 这个接口不支持https。个人网站如果是https类型，请自行配置反向代理
+    apiUrl: "https://www.freelibrary.top/wpGetListByCategory", // 这是我个人网站配置的反向代理
     ratio: 0.618,
     types: '360new',
     downApi: 'https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url='
@@ -97,11 +98,12 @@ function ajax360Wal(cid, start, count) {
     $.ajax({
         type: "GET",
         url: seting.apiUrl,
-        // data: "cid=" + cid + "&start=" + start + "&count=" + count,
-        data: "cids=" + cid + "&pageno=" + start + "&count=" + count,
+        // data: "cid=" + cid + "&start=" + start + "&count=" + count, // 使用360wallpaperApi接口，打开注释
+        data: "cids=" + cid + "&pageno=" + start + "&count=" + count, // 默认使用GetListByCategory接口
         dataType: "json",
         success: function(jsonData) {
-            let list = jsonData.data.list
+            // let list = jsonData.data     // 使用360wallpaperApi接口，打开注释
+            let list = jsonData.data.list  // 默认使用GetListByCategory接口
             for (var i = 0; i < list.length; i++) {
                 console.info(list[i].tag)
                 addJigsaw(list[i].url, decode360Tag(list[i].tag))
