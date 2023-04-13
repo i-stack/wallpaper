@@ -1,7 +1,7 @@
 var seting = {
     // apiUrl: "https://api.vvhan.com/api/360wallpaperApi.php", // 这个接口已经不维护了,壁纸数量有限
     // apiUrl: "http://wp.birdpaper.com.cn/intf/GetListByCategory", // 这个接口不支持https。个人网站如果是https类型，请自行配置反向代理
-    apiUrl: "https://www.freelibrary.top/wpGetListByCategory", // 这是我个人网站配置的反向代理
+    apiUrl: "https://www.freelibrary.top/wpGetListByCategory/", // 这是我个人网站配置的反向代理
     ratio: 0.618,
     types: '360new',
     downApi: 'https://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url='
@@ -101,6 +101,13 @@ function ajax360Wal(cid, start, count) {
         // data: "cid=" + cid + "&start=" + start + "&count=" + count, // 使用360wallpaperApi接口，打开注释
         data: "cids=" + cid + "&pageno=" + start + "&count=" + count, // 默认使用GetListByCategory接口
         dataType: "json",
+        // headers: {
+        //     'Content-Type': 'application/json',
+        //     'Access-Control-Allow-Origin': '*',
+        //     'Access-Control-Allow-Credentials': true,
+        //     'Access-Control-Allow-Methods': 'PUT, GET, POST, DELETE, OPTIONS',
+        //     // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        // },
         success: function(jsonData) {
             // let list = jsonData.data     // 使用360wallpaperApi接口，打开注释
             let list = jsonData.data.list  // 默认使用GetListByCategory接口
